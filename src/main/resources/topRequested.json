@@ -1,0 +1,39 @@
+{
+  "topRequested": [
+    {
+      "Option": "United States Dollar \u003d\u003e\u003e Argentine Peso",
+      "Code": "USD/ARS",
+      "Times": 2
+    },
+    {
+      "Option": "Colombian Peso \u003d\u003e\u003e United States Dollar",
+      "Code": "COP/USD",
+      "Times": 0
+    },
+    {
+      "Option": "Zambian Kwacha \u003d\u003d\u003e Zimbabwean Dollar",
+      "Code": "ZMW/ZWL",
+      "Times": 0
+    },
+    {
+      "Option": "United States Dollar \u003d\u003e\u003e Colombian Peso",
+      "Code": "USD/COP",
+      "Times": 0
+    },
+    {
+      "Option": "Argentine Peso \u003d\u003e\u003e United States Dollar",
+      "Code": "ARS/USD",
+      "Times": 0
+    },
+    {
+      "Option": "United States Dollar \u003d\u003e\u003e Brazilian Real",
+      "Code": "USD/BRL",
+      "Times": 0
+    },
+    {
+      "Option": "Brazilian Real \u003d\u003e\u003e United States Dollar",
+      "Code": "BRL/USD",
+      "Times": 0
+    }
+  ]
+}
