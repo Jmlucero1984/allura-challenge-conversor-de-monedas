@@ -1,9 +1,11 @@
 package org.jmlucero;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.net.URI;
@@ -27,127 +29,70 @@ public class Main {
         HttpRequest request;
         HttpResponse<String> response;
         BigDecimal outputSignificant;
-
-
         Gson gson;
         ApiResult apiResult;
         // Currencies currencies = gson.fromJson(json,Currencies.class);
-        String outputConverted, resultMessage,fullURL,conversionCodes="";
-        double valueToConvert=0.0;
-        String[] codes;
-
-
+        String outputConverted, resultMessage, fullURL, conversionCodes = "";
+        double valueToConvert = 0.0;
         int option;
-
-        // "El valor de 25.0 [USD] corresponde al valor final de =>>> 26592.75 ARS
         boolean continuar = true;
         while (continuar) {
             System.out.println("******************************************************");
             System.out.println("Sea bienvenido/a al Conversor de Moneda =]");
-            options = fl.getTopRequestedOptions().getTopRequestedOptions();
+            options = fl.getTopRequestedOptionsEntity().getTopRequestedOptionsList();
             Collections.sort(options);
             for (int i = 0; i < Math.min(options.size(), 6); i++) {
                 System.out.println(i + 1 + ") " + options.get(i).getOption());
-
             }
             System.out.println("7) Otras monedas");
             System.out.println("8) Salir");
-            System.out.println("Elija una opción válida");
-            String input = sc.nextLine();
-            try {
-                option = Integer.parseInt(input);
-                if (option > 0 && option <9) {
-                    if(option==8) {
-                        System.out.println("Gracias por usar el Conversor de Monedas");
-                        break;
+            System.out.println();
+            option = checkIntInput(sc, 1, 9, "Elija una opción válida");
+            if (option > 0 && option < 9) {
+                if (option == 8) {
+                    System.out.println("Gracias por usar el Conversor de Monedas");
+                    break;
+                }
+                if (option == 7) {
+                    int cantDisponibles = fl.getUNrecognizedCurrencies().length;
+                    int origin, destiny;
+                    System.out.println("LISTADO DE TODAS LAS MONEDAS DISPONIBLES");
+                    for (int i = 0; i < cantDisponibles; i++) {
+                        System.out.println(i + 1 + " " + fl.getUNrecognizedCurrencies()[i]);
                     }
-                    if(option==7) {
-                        int cantDisponibles = fl.getUNrecognizedCurrencies().length;
-
-                        int origin, destiny;
-                        System.out.println("LISTADO DE TODAS LAS MONEDAS DISPONIBLES");
-                        for (int i = 0; i < cantDisponibles; i++) {
-                            System.out.println(i+1+" "+fl.getUNrecognizedCurrencies()[i]);
-
-                        }
-
-                        while(true) {
-                            System.out.println("Introduzca la opción de la moneda orígen");
-                            try {
-                                origin = Integer.parseInt(sc.nextLine());
-                                if (origin > cantDisponibles || origin < 1) continue;
-                                break;
-
-                            } catch (Exception e) {
-                                System.out.println("Ha introducido un valor no valido");
-                            }
-                        }
-                        while(true) {
-                            System.out.println("Introduzca la opción de la moneda destino");
-                            try {
-                                destiny = Integer.parseInt(sc.nextLine());
-                                if (destiny > cantDisponibles || destiny < 1) continue;
-                                break;
-
-                            } catch (Exception e) {
-                                System.out.println("Ha introducido un valor no valido");
-                            }
-                        }
-
-                        conversionCodes = fl.getUNrecognizedCurrencies()[origin-1].currencyCode+"/"+fl.getUNrecognizedCurrencies()[destiny-1].currencyCode;
-                        String finalConversionCodes = conversionCodes;
-                        if(options.stream().filter(t->t.getCode().equals(finalConversionCodes)).toArray().length==0){
-                            Option newOption = new Option(
-                                    fl.getUNrecognizedCurrencies()[origin-1].currencyName+" =>> "+fl.getUNrecognizedCurrencies()[destiny-1].currencyName,
-                                    conversionCodes,0);
-                            options.add(newOption);
-                        }
-                        while(true) {
-                            System.out.println("Introduzca una cantidad a convertir");
-                            try {
-                                valueToConvert = Double.parseDouble(sc.nextLine());
-                                break;
-
-                            } catch (Exception e) {
-                                System.out.println("Ha introducido un valor no numérico");
-                            }
-
-                        }
-
-                    } else {
-                        while(true) {
-                            System.out.println("Introduzca una cantidad a convertir");
-                            try {
-                                valueToConvert = Double.parseDouble(sc.nextLine());
-                                break;
-
-                            } catch (Exception e) {
-                                System.out.println("Ha introducido un valor no numérico");
-                            }
-
-                        }
-                        conversionCodes=options.get(option - 1).getCode();
-
+                    origin = checkIntInput(sc, 1, cantDisponibles, "Introduzca la opción de la moneda orígen");
+                    destiny = checkIntInput(sc, 1, cantDisponibles, "Introduzca la opción de la moneda destino");
+                    conversionCodes = fl.getUNrecognizedCurrencies()[origin - 1].currencyCode + "/" + fl.getUNrecognizedCurrencies()[destiny - 1].currencyCode;
+                    String finalConversionCodes = conversionCodes;
+                    if (options.stream().filter(t -> t.getCode().equals(finalConversionCodes)).toArray().length == 0) {
+                        Option newOption = new Option(
+                                fl.getUNrecognizedCurrencies()[origin - 1].currencyName + " =>> " + fl.getUNrecognizedCurrencies()[destiny - 1].currencyName,
+                                conversionCodes, 0);
+                        options.add(newOption);
                     }
-                    fullURL = baseApiURL + conversionCodes + "/" + valueToConvert;
+                } else {
+                    conversionCodes = options.get(option - 1).getCode();
 
-                    request = HttpRequest.newBuilder()
-                            .uri(URI.create(fullURL))
-                            .build();
-                    response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                }
+                valueToConvert =   checkDoubleInput(sc, 0, Double.MAX_VALUE, "Introduzca una cantidad a convertir");
+                fullURL = baseApiURL + conversionCodes + "/" + valueToConvert;
+                request = HttpRequest.newBuilder()
+                        .uri(URI.create(fullURL))
+                        .build();
+                response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                if(response.statusCode()==200) {
                     gson = new Gson();
+
                     apiResult = gson.fromJson(response.body(), ApiResult.class);
                     double converted = apiResult.getConversionResult();
-                    if(converted<0) {
+                    if (converted < 0) {
                         outputSignificant = BigDecimal.valueOf(converted);
-                        outputConverted=String.valueOf(outputSignificant.round(new MathContext(3)));
+                        outputConverted = String.valueOf(outputSignificant.round(new MathContext(3)));
 
                     } else {
-                        outputConverted = String.format("%.2f",converted);
+                        outputConverted = String.format("%.2f", converted);
                     }
-
-                    resultMessage = "El valor "+valueToConvert+" ["+apiResult.getBaseCode()+"] corresponde al valor final de =>>> "+outputConverted+" ["+apiResult.getTargetCode()+"]";
-
+                    resultMessage = "El valor " + valueToConvert + " [" + apiResult.getBaseCode() + "] corresponde al valor final de =>>> " + outputConverted + " [" + apiResult.getTargetCode() + "]";
                     System.out.println(resultMessage);
                     options.get(option - 1).incrementTimes();
                     Collections.sort(options);
@@ -155,17 +100,51 @@ public class Main {
                     System.out.println("Presione cualquier tecla para continuar...");
                     sc.nextLine();
                 } else {
-
-                    System.out.println("No ha introducido una opción válida");
-                    System.out.println("Presione cualquier tecla para continuar...");
+                    System.out.println("""
+                La URL de la API no ha podido enviar una respuesta exitosa para la petición realizada.
+                Posibles causas:
+                -URL en el archivo config.json no se ha definido correctamente.
+                -Alguna de las divisas elegidas para la petición pueden no estar disponibles en este momento en el servidor
+                de la API.
+                Compruebe la URL o intente nuevamente más tarde.
+                """);
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Ha introducido una opcion no valida");
-                System.out.println("Presione cualquier tecla para continuar...");
-                sc.nextLine();
             }
-
         }
-
     }
+
+    /*
+    Debería poder resumirse estas dos funciones mediante el uso de un generico que extienda de Number?
+     */
+    public static double checkDoubleInput(Scanner sc, double min, double max, String msg) {
+        double input = 0.0;
+        while (true) {
+            System.out.println(msg);
+            try {
+                input = Double.parseDouble(sc.nextLine());
+                if (input < min || input > max) continue;
+                break;
+            } catch (Exception e) {
+                System.out.println("Ha introducido un valor no válido");
+            }
+        }
+        return input;
+    }
+
+    public static int checkIntInput(Scanner sc, int min, int max, String msg) {
+        int input = 0;
+        while (true) {
+            System.out.println(msg);
+            try {
+                input = Integer.parseInt(sc.nextLine());
+                if (input < min || input > max) continue;
+                break;
+            } catch (Exception e) {
+                System.out.println("Ha introducido un valor no válido");
+            }
+        }
+        return input;
+    }
+
 }
+

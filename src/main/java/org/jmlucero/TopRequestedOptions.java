@@ -8,7 +8,7 @@ public class TopRequestedOptions {
     @SerializedName("topRequested")
     ArrayList<Option> topRequestedOptions;
 
-    public ArrayList<Option> getTopRequestedOptions() {
+    public ArrayList<Option> getTopRequestedOptionsList() {
         return topRequestedOptions;
     }
 

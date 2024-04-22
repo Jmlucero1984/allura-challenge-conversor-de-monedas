@@ -14,7 +14,7 @@ public class FileManager {
 
     private TopRequestedOptions topRequestedOptions;
 
-    public TopRequestedOptions getTopRequestedOptions() {
+    public TopRequestedOptions getTopRequestedOptionsEntity() {
         return topRequestedOptions;
     }
 
