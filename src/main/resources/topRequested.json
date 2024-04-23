@@ -3,21 +3,31 @@
     {
       "Option": "United States Dollar \u003d\u003e\u003e Argentine Peso",
       "Code": "USD/ARS",
-      "Times": 6
+      "Times": 9
     },
     {
       "Option": "Argentine Peso \u003d\u003e\u003e Chilean Peso",
       "Code": "ARS/CLP",
-      "Times": 3
-    },
-    {
-      "Option": "Brazilian Real \u003d\u003e\u003e United States Dollar",
-      "Code": "BRL/USD",
-      "Times": 1
+      "Times": 4
     },
     {
       "Option": "United States Dollar \u003d\u003e\u003e Brazilian Real",
       "Code": "USD/BRL",
+      "Times": 2
+    },
+    {
+      "Option": "Colombian Peso \u003d\u003e\u003e United States Dollar",
+      "Code": "COP/USD",
+      "Times": 2
+    },
+    {
+      "Option": "Bolivian Boliviano \u003d\u003e\u003e Euro",
+      "Code": "BOB/EUR",
+      "Times": 2
+    },
+    {
+      "Option": "Brazilian Real \u003d\u003e\u003e United States Dollar",
+      "Code": "BRL/USD",
       "Times": 1
     },
     {
@@ -26,19 +36,14 @@
       "Times": 1
     },
     {
-      "Option": "Zambian Kwacha \u003d\u003d\u003e Zimbabwean Dollar",
-      "Code": "ZMW/ZWL",
+      "Option": "Argentine Peso \u003d\u003e\u003e United States Dollar",
+      "Code": "ARS/USD",
       "Times": 1
     },
     {
-      "Option": "Colombian Peso \u003d\u003e\u003e United States Dollar",
-      "Code": "COP/USD",
-      "Times": 0
-    },
-    {
-      "Option": "Argentine Peso \u003d\u003e\u003e United States Dollar",
-      "Code": "ARS/USD",
-      "Times": 0
+      "Option": "Belize Dollar \u003d\u003e\u003e Hong Kong Dollar",
+      "Code": "BZD/HKD",
+      "Times": 1
     }
   ]
 }

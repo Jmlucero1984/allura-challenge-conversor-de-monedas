@@ -32,13 +32,9 @@ public class Operation {
 
     @Override
     public String toString() {
-        return "Operation{" +
-                "date='" + date + '\'' +
-                ", option='" + option + '\'' +
-                ", code='" + code + '\'' +
-                ", ratio=" + ratio +
-                ", input=" + input +
-                ", converted=" + converted +
-                '}';
+        return   "FECHA: "+date+" | OPERACION: "+code + " ("+option+") | RATIO: "+ratio+" | ENTRADA: "+input+" | CONVERTIDO: "+converted;
+
+
+
     }
 }

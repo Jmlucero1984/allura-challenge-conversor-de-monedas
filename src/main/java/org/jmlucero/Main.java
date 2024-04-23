@@ -13,6 +13,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
@@ -32,6 +34,7 @@ public class Main {
         ApiResult apiResult;
         Date date = new Date();
 
+        DateTimeFormatter customDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
 
         // Currencies currencies = gson.fromJson(json,Currencies.class);
         String outputConverted, resultMessage, fullURL, conversionCodes = "";
@@ -39,24 +42,32 @@ public class Main {
         int option;
         boolean continuar = true;
         while (continuar) {
-            System.out.println("******************************************************");
-            System.out.println("Sea bienvenido/a al Conversor de Moneda =]");
+            System.out.println("*********************************************\n");
+            System.out.println("Sea bienvenido/a al Conversor de Moneda =]\n");
             options = fl.getTopRequestedOptionsEntity().getTopRequestedOptionsList();
             Collections.sort(options);
             for (int i = 0; i < Math.min(options.size(), 6); i++) {
                 System.out.println(i + 1 + ") " + options.get(i).getOption());
             }
             System.out.println("7) Otras monedas");
-            System.out.println("8) Salir");
+            System.out.println("8) Mostrar Historial");
+            System.out.println("9) Salir");
             System.out.println();
-            option = checkIntInput(sc, 1, 9, "Elija una opción válida");
+            option = checkIntInput(sc, 1, 9, "Elija una opción válida...");
             Option newOption = null;
             String finalConversionCodes;
-            if (option > 0 && option < 9) {
+            if (option > 0 && option < 10) {
                 finalConversionCodes = null;
-                if (option == 8) {
-                    System.out.println("Gracias por usar el Conversor de Monedas");
+                if (option == 9) {
+                    System.out.println("Gracias por usar el Conversor de Monedas!");
                     break;
+                }
+                if (option == 8) {
+                    System.out.println("HISTORIAL DE TUS CONSULTAS");
+                    fl.getOperationsHistory().getOperationsHistory().forEach(System.out::println);
+                    System.out.println("Presione una tecla para continuar...");
+                    sc.nextLine();
+                    continue;
                 }
                 if (option == 7) {
                     int cantDisponibles = fl.getUNrecognizedCurrencies().length;
@@ -114,15 +125,16 @@ public class Main {
                         //System.out.println("DATE: "+date.toInstant());
                         //System.out.println("ZONE: "+tz);
                         ZonedDateTime nowZonedTime = ZonedDateTime.ofInstant(date.toInstant(), tz.toZoneId());
+
                         fl.getOperationsHistory().getOperationsHistory().add(new Operation(
                                 op.getOption(),
                                 op.getCode(),
-                                nowZonedTime.toString(),
+                                nowZonedTime.format(customDateFormatter),
                                 apiResult.getConversionRate(),
                                 valueToConvert,
                                 apiResult.getConversionResult()
                         ));
-                        System.out.println("ZONED: "+nowZonedTime);
+
                     }
 
                     Collections.sort(options);

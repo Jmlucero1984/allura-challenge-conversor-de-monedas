@@ -15,6 +15,78 @@
       "Ratio": 864.75,
       "Input": 1530.0,
       "Converted": 1323067.5
+    },
+    {
+      "Date": "2024-04-23T12:08:49.682-03:00[America/Buenos_Aires]",
+      "Option": "United States Dollar \u003d\u003e\u003e Brazilian Real",
+      "Code": "USD/BRL",
+      "Ratio": 5.2085,
+      "Input": 1665.0,
+      "Converted": 8672.1525
+    },
+    {
+      "Date": "2024-04-23T12:08:49.682-03:00[America/Buenos_Aires]",
+      "Option": "United States Dollar \u003d\u003e\u003e Argentine Peso",
+      "Code": "USD/ARS",
+      "Ratio": 864.75,
+      "Input": 2136.0,
+      "Converted": 1847106.0
+    },
+    {
+      "Date": "2024-04-23T12:27:38.924-03:00[America/Buenos_Aires]",
+      "Option": "United States Dollar \u003d\u003e\u003e Argentine Peso",
+      "Code": "USD/ARS",
+      "Ratio": 864.75,
+      "Input": 1235.6,
+      "Converted": 1068485.1
+    },
+    {
+      "Date": "2024-04-23T12:27:38.924-03:00[America/Buenos_Aires]",
+      "Option": "Argentine Peso \u003d\u003e\u003e Chilean Peso",
+      "Code": "ARS/CLP",
+      "Ratio": 1.1063,
+      "Input": 165.5,
+      "Converted": 183.09265
+    },
+    {
+      "Date": "23.04.2024 12:36:03",
+      "Option": "United States Dollar \u003d\u003e\u003e Argentine Peso",
+      "Code": "USD/ARS",
+      "Ratio": 864.75,
+      "Input": 1235.0,
+      "Converted": 1067966.25
+    },
+    {
+      "Date": "23/04/2024 12:37:47",
+      "Option": "Colombian Peso \u003d\u003e\u003e United States Dollar",
+      "Code": "COP/USD",
+      "Ratio": 2.5589E-4,
+      "Input": 1365.0,
+      "Converted": 0.34928985
+    },
+    {
+      "Date": "23/04/2024 12:37:47",
+      "Option": "Bolivian Boliviano \u003d\u003e\u003e Euro",
+      "Code": "BOB/EUR",
+      "Ratio": 0.1356,
+      "Input": 13265.0,
+      "Converted": 1798.734
+    },
+    {
+      "Date": "23/04/2024 12:37:47",
+      "Option": "Bolivian Boliviano \u003d\u003e\u003e Euro",
+      "Code": "BOB/EUR",
+      "Ratio": 0.1356,
+      "Input": 1265.0,
+      "Converted": 171.534
+    },
+    {
+      "Date": "23/04/2024 12:37:47",
+      "Option": "Belize Dollar \u003d\u003e\u003e Hong Kong Dollar",
+      "Code": "BZD/HKD",
+      "Ratio": 3.9182,
+      "Input": 135632.6,
+      "Converted": 531435.65332
     }
   ]
 }
