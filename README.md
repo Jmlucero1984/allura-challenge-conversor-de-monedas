@@ -1,7 +1,7 @@
 # allura-challenge-conversor-de-monedas
 Segundo desafío de Java Backend de Allura Latam - Conversor de monedas implementando API
 
-## Funcionalidades implementadas
+## 🎯 Funcionalidades implementadas
 - Menú de opciones listando las operaciones más recurrentes del usuario
 - Ordenamiento de las opciones según ranking de solicitudes (información almacenada en un archivo JSON local)
 - Posibilidad de elegir otras monedas de origen y destino de la conversión a través de un menú ampliado, que toma de un JSON local las opciones disponibles y sus nomenclaturas
