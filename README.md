@@ -16,7 +16,7 @@ config.json: Se define la URL de la API y se cargan el resto de las monedas disp
 ![Config](https://github.com/Jmlucero1984/allura-challenge-conversor-de-monedas/blob/4cb2e5200785e212905d5f241c5c30b8bb006c9a/config.JPG)
 
 currencies.txt: Modelo del listado en texto tomado de la web de la API para transformarlo a JSON a través de una utilidad provista en el código fuente de esta aplicación
- ![Currencies](https://github.com/Jmlucero1984/allura-challenge-conversor-de-monedas/blob/798e5bf087e42da3d032b2b3287c37b4d498faee/currencies.jpg)
+![Currencies](https://github.com/Jmlucero1984/allura-challenge-conversor-de-monedas/blob/798e5bf087e42da3d032b2b3287c37b4d498faee/currencies.jpg)
 
 topRequested.json: Contiene el listado de las opciones (no todas las operaciones) elegidas hasta el momento con el dato de la cantidad de veces que han sido solicitadas para establecer su orden de aparición en el menu principal de acuerdo a este criterio de rankeo.
 ![Raking](https://github.com/Jmlucero1984/allura-challenge-conversor-de-monedas/blob/798e5bf087e42da3d032b2b3287c37b4d498faee/topRequested.JPG)
