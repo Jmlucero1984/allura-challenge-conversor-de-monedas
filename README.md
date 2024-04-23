@@ -12,8 +12,7 @@ Segundo desafío de Java Backend de Allura Latam - Conversor de monedas implemen
 
 ## Screenshots
 
-config.JPG
-
+[config.JPG](https://github.com/Jmlucero1984/allura-challenge-conversor-de-monedas/blob/4cb2e5200785e212905d5f241c5c30b8bb006c9a/config.JPG)
 
 
 
