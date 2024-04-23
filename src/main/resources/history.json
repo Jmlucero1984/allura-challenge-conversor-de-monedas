@@ -1,0 +1,20 @@
+{
+  "history": [
+    {
+      "Date": "2024-04-22T21:54:51.968-03:00[America/Buenos_Aires]",
+      "Option": "United States Dollar \u003d\u003e\u003e Argentine Peso",
+      "Code": "USD/ARS",
+      "Ratio": 0.0,
+      "Input": 0.0,
+      "Converted": 0.0
+    },
+    {
+      "Date": "2024-04-22T22:25:47.412-03:00[America/Buenos_Aires]",
+      "Option": "United States Dollar \u003d\u003e\u003e Argentine Peso",
+      "Code": "USD/ARS",
+      "Ratio": 864.75,
+      "Input": 1530.0,
+      "Converted": 1323067.5
+    }
+  ]
+}

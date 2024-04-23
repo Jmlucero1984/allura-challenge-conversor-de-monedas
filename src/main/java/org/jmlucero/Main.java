@@ -12,9 +12,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+import java.time.ZonedDateTime;
+import java.util.*;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -31,6 +30,9 @@ public class Main {
         BigDecimal outputSignificant;
         Gson gson;
         ApiResult apiResult;
+        Date date = new Date();
+
+
         // Currencies currencies = gson.fromJson(json,Currencies.class);
         String outputConverted, resultMessage, fullURL, conversionCodes = "";
         double valueToConvert = 0.0;
@@ -48,7 +50,10 @@ public class Main {
             System.out.println("8) Salir");
             System.out.println();
             option = checkIntInput(sc, 1, 9, "Elija una opción válida");
+            Option newOption = null;
+            String finalConversionCodes;
             if (option > 0 && option < 9) {
+                finalConversionCodes = null;
                 if (option == 8) {
                     System.out.println("Gracias por usar el Conversor de Monedas");
                     break;
@@ -63,14 +68,15 @@ public class Main {
                     origin = checkIntInput(sc, 1, cantDisponibles, "Introduzca la opción de la moneda orígen");
                     destiny = checkIntInput(sc, 1, cantDisponibles, "Introduzca la opción de la moneda destino");
                     conversionCodes = fl.getUNrecognizedCurrencies()[origin - 1].currencyCode + "/" + fl.getUNrecognizedCurrencies()[destiny - 1].currencyCode;
-                    String finalConversionCodes = conversionCodes;
-                    if (options.stream().filter(t -> t.getCode().equals(finalConversionCodes)).toArray().length == 0) {
-                        Option newOption = new Option(
+                   String fcc = conversionCodes;
+                    if (options.stream().filter(t -> t.getCode().equals(fcc)).toArray().length == 0) {
+                        newOption = new Option(
                                 fl.getUNrecognizedCurrencies()[origin - 1].currencyName + " =>> " + fl.getUNrecognizedCurrencies()[destiny - 1].currencyName,
                                 conversionCodes, 0);
-                        options.add(newOption);
+
                     }
                 } else {
+
                     conversionCodes = options.get(option - 1).getCode();
 
                 }
@@ -81,6 +87,9 @@ public class Main {
                         .build();
                 response = client.send(request, HttpResponse.BodyHandlers.ofString());
                 if(response.statusCode()==200) {
+                    if(newOption!=null) {
+                        options.add(newOption);
+                    }
                     gson = new Gson();
 
                     apiResult = gson.fromJson(response.body(), ApiResult.class);
@@ -94,9 +103,31 @@ public class Main {
                     }
                     resultMessage = "El valor " + valueToConvert + " [" + apiResult.getBaseCode() + "] corresponde al valor final de =>>> " + outputConverted + " [" + apiResult.getTargetCode() + "]";
                     System.out.println(resultMessage);
-                    options.get(option - 1).incrementTimes();
+                    String fcc = conversionCodes;
+
+                    Optional<Option> opt= options.stream().filter(t -> t.getCode().equals(fcc)).findFirst();
+                    if(opt.isPresent()) {
+                        Option op = opt.get();
+                        op.incrementTimes();
+
+                        TimeZone tz= TimeZone.getDefault();
+                        //System.out.println("DATE: "+date.toInstant());
+                        //System.out.println("ZONE: "+tz);
+                        ZonedDateTime nowZonedTime = ZonedDateTime.ofInstant(date.toInstant(), tz.toZoneId());
+                        fl.getOperationsHistory().getOperationsHistory().add(new Operation(
+                                op.getOption(),
+                                op.getCode(),
+                                nowZonedTime.toString(),
+                                apiResult.getConversionRate(),
+                                valueToConvert,
+                                apiResult.getConversionResult()
+                        ));
+                        System.out.println("ZONED: "+nowZonedTime);
+                    }
+
                     Collections.sort(options);
                     fl.saveTopRequested();
+                    fl.saveHistory();
                     System.out.println("Presione cualquier tecla para continuar...");
                     sc.nextLine();
                 } else {
@@ -109,6 +140,8 @@ public class Main {
                 Compruebe la URL o intente nuevamente más tarde.
                 """);
                 }
+            } else {
+                finalConversionCodes = null;
             }
         }
     }
