@@ -10,6 +10,10 @@ Segundo desafío de Java Backend de Allura Latam - Conversor de monedas implemen
 - Seguimiento de las operaciones históricas
 - EXTRA: Utilidad para convertir un listado de monedas en texto plano tomado de la web de la API a formato JSON para su incorporación en la aplicación
 
+## 🎥 Captura de Video
+
+https://github.com/Jmlucero1984/allura-challenge-conversor-de-monedas/assets/91501518/4a0f65c2-a70a-4397-b430-e7a29a940755
+
 ## 📷 Screenshots
 
 config.json: Se define la URL de la API y se cargan el resto de las monedas disponibles
