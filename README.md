@@ -21,14 +21,17 @@ currencies.txt: Modelo del listado en texto tomado de la web de la API para tran
 ![Currencies](https://github.com/Jmlucero1984/allura-challenge-conversor-de-monedas/blob/798e5bf087e42da3d032b2b3287c37b4d498faee/currencies.jpg)
 
 topRequested.json: Contiene el listado de las opciones (no todas las operaciones) elegidas hasta el momento con el dato de la cantidad de veces que han sido solicitadas para establecer su orden de aparición en el menu principal de acuerdo a este criterio de rankeo.
+
 ![Raking](https://github.com/Jmlucero1984/allura-challenge-conversor-de-monedas/blob/798e5bf087e42da3d032b2b3287c37b4d498faee/topRequested.JPG)
 
 history.json: Contiene el historial de todas las operaciones realizadas, incluyendo día y hora, monedas de orígen y destino, importe ingresado, el ratio de conversión y el importe final luego de la conversión.
+
 ![History](https://github.com/Jmlucero1984/allura-challenge-conversor-de-monedas/blob/798e5bf087e42da3d032b2b3287c37b4d498faee/history.JPG)
 
-## Ejecución del JAR a través de una desktop CLI 
+## 📂 Ejecución del JAR a través de una desktop CLI 
 
 Al momento de la confección de este README queda pendiente la implementación de la posibilidad para el usuario de configurar la ruta de guardado de los JSON locales y el despliegue automático de los archivos requeridos mínimos al momento de la primera ejecución si no se contara con los mismos en el entorno donde se ejecuta la aplicación.
 Por ende, para la ejecución de esta apliación por medio de una linea de comandos se sugiere copiar el contenido de la carpeta "resources", con su ruta completa, es decir, una carpeta src, que contenga a otra main y esta a su vez a resources, en el mismo directorio donde se encuente el paquete jar.
 La ejecución se realiza mediante los comandos:   java -jar AlluraConversorDeMoneda.jar
+
 ![JAR](https://github.com/Jmlucero1984/allura-challenge-conversor-de-monedas/blob/0166c153b307153fc4d9120249cc4eacbde6cfd5/jar.JPG)
