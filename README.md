@@ -1,5 +1,5 @@
-# allura-challenge-conversor-de-monedas
-Segundo desafío de Java Backend de Allura Latam - Conversor de monedas implementando API
+# alura-challenge-conversor-de-monedas
+Segundo desafío de Java Backend de Alura Latam - Conversor de monedas implementando API
 
 ## 🎯 Funcionalidades implementadas
 - Menú de opciones listando las operaciones más recurrentes del usuario
